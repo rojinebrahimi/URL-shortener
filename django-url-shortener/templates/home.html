@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}
+    Home
+{% endblock title %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <br>
+        <br>
+        <div class="content">
+            <div class="col-sm-9">
+                <form>
+                    {% csrf_token %}
+                    <input type="text" name="url" id="url" class="form-control input-sm"
+                           placeholder="http://www.github.com"/>
+                    <br>
+                    <button id="submitButton" class="btn btn-outline-dark">Shorten it!</button>
+                </form>
+            </div>
+            <br>
+            <div class="col-sm-9">
+                <div class="panel-footer">
+                    <a href="#" id="url-result">Enter The URL You Want To Shorten And Click The Button.</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+          <div id="content" align="center">
+            <p><h3>Please Login/Sign Up In Order To Shorten Your URL!</h3></p>
+          </div>
+          <div id="link-icon" align="center">
+            <img src="https://img.icons8.com/wired/100/000000/link.png"/>
+          </div>
+    {% endif %}
+{% endblock content %}

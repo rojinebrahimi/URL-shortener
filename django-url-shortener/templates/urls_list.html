@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    My URLs
+{% endblock title %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% for url in urls_list %}
+            {% if url.user == request.user %}
+                <br>
+                <li style="max-width: 864px">
+                    <a href="{% url 'home' %}">{{ url.original_url | truncatechars:120 }}</a>
+                    <a href="{% url 'home' %}">{{ url.short_url | linebreaks }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <br>
+    <button onclick="location.href='{% url 'home' %}'" class="btn btn-outline-dark" type="submit">Back Home</button>
+    <br>
+    <br>
+    {% include 'pagination.html' with page=urls %}
+{% endblock content %}
+
+
+
+
+
